@@ -7,30 +7,27 @@ class HomeScreen extends StatelessWidget{
     return Scaffold(
       body: Column(
         children: [
+          const SizedBox(height: 50),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Stack(
-                  children: [
-                    Container(
-                      width: 70,
-                      height: 70,
-                      decoration: BoxDecoration(
-                        color: Colors.yellow,
-                        borderRadius: BorderRadius.circular(20)
-                      ),
-                      
-                    ),
-                    Image.asset('assets/icons/fourdots_80930.png',height: 30,width: 30)
-                  ],
-                )
-                
+               CircleAvatar(
+                 radius: 20,
+                 backgroundColor: Colors.grey.shade300,
+                 child: Image.asset('assets/icons/fourdots_80930.png', height: 15,width: 15),
+               ),
+                CircleAvatar(
+                  radius: 20,
+                  backgroundColor: Colors.grey.shade300,
+                  child: Image.asset('assets/icons/bell-notification-notifications.png', height: 15,width: 15),
+                ),
             
               ],
             ),
-          )
+          ),
+          Text('data')
         ],
       ),
     );
