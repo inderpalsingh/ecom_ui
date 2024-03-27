@@ -77,7 +77,15 @@ class ProductListScreen extends StatelessWidget {
                     borderRadius: BorderRadius.only(topRight: Radius.circular(20),bottomLeft: Radius.circular(10),
                     )
                   ),
-                )
+                ),
+                Container(
+                  margin: EdgeInsets.only(left: 150),
+                  height: 35,
+                  width: 50,
+                  child: Icon(Icons.monitor_heart_outlined),
+                  
+                ),
+                
               ],
             );
           },
