@@ -11,7 +11,7 @@ class ProductListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: GridView.builder(
           itemCount: ApiService.categoriesList.length,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -30,31 +30,31 @@ class ProductListScreen extends StatelessWidget {
                   ),
                   child: Column(
                     children: [
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       Image.network(ApiService.categoriesList[index]['image'].toString(),height: 80,width: 80),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: Text(ApiService.categoriesList[index]['title'].toString(),style: TextStyle(fontSize: 12)),
+                        child: Text(ApiService.categoriesList[index]['title'].toString(),style: const TextStyle(fontSize: 12)),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Text('\$${ApiService.categoriesList[index]['price']}',style: TextStyle(fontSize: 12)),
-                          SizedBox(
+                          Text('\$${ApiService.categoriesList[index]['price']}',style: const TextStyle(fontSize: 12)),
+                          const SizedBox(
                             height: 15,
                             child: CircleAvatar(
                               backgroundColor: Colors.black,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 15,
                             child: CircleAvatar(
                               backgroundColor: Colors.blue,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 15,
                             child: CircleAvatar(
                               backgroundColor: Colors.red,
@@ -69,20 +69,18 @@ class ProductListScreen extends StatelessWidget {
                   )
                 ),
                 Container(
-                  margin: EdgeInsets.only(left: 150),
+                  margin: const EdgeInsets.only(left: 150),
                   height: 35,
                   width: 50,
-                  decoration: BoxDecoration(
-                    color: Colors.orange,
+                  decoration: const BoxDecoration(
+                    color: Colors.deepOrange,
                     borderRadius: BorderRadius.only(topRight: Radius.circular(20),bottomLeft: Radius.circular(10),
                     )
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(left: 150),
-                  height: 35,
-                  width: 50,
-                  child: Icon(Icons.monitor_heart_outlined),
+                  margin: const EdgeInsets.only(left: 157,top: 2),
+                  child: Image.asset('assets/icons/empty-heart.png',width: 20,height: 30,color: Colors.white,),
                   
                 ),
                 
