@@ -35,7 +35,7 @@ class ProductListScreen extends StatelessWidget {
                       const SizedBox(height: 10),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: Text(ApiService.categoriesList[index]['title'].toString(),style: const TextStyle(fontSize: 12)),
+                        child: Text(ApiService.categoriesList[index]['title'].toString().substring(0,18),style: const TextStyle(fontSize: 12)),
                       ),
                       const SizedBox(height: 10),
                       Row(
