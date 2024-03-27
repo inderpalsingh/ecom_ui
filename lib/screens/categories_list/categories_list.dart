@@ -8,22 +8,25 @@ class CategoriesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
-    return Container(
-      height: 80,
+
+    return SizedBox(
+      height: 120,
       child: ListView.builder(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        scrollDirection: Axis.horizontal,
-        shrinkWrap: true,
-        itemCount: ApiService.categoriesList.length,
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          scrollDirection: Axis.horizontal,
+          shrinkWrap: true,
+          itemCount: ApiService.categoriesList.length,
           itemBuilder: (context,index){
             return Padding(
               padding: const EdgeInsets.all(8.0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(100),
-                child: Container(
-                  child: Image.network(ApiService.categoriesList[index]['image'].toString()),
-                ),
+              child: Column(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(100),
+                    child: Image.network(ApiService.categoriesList[index]['image'].toString(),height: 80,width: 80,),
+                  ),
+                  Text(ApiService.categoriesList[index]['category'].toString(), style: TextStyle(fontSize: 12),)
+                ],
               ),
             );
           }

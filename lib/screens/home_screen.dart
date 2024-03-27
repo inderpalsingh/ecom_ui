@@ -1,4 +1,5 @@
 import 'package:ecom_ui/screens/categories_list/categories_list.dart';
+import 'package:ecom_ui/screens/products_list/product_list.dart';
 import 'package:ecom_ui/screens/top_screen/top_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -52,6 +53,7 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 20),
+          ProductListScreen()
           
         ],
       ),
