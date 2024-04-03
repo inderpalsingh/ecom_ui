@@ -37,31 +37,35 @@ class ProductListScreen extends StatelessWidget {
                       const SizedBox(height: 10),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: Text(ApiService.categoriesList[index]['title'].toString().substring(0,18),style: const TextStyle(fontSize: 12)),
+                        child: Text(ApiService.categoriesList[index]['title'].toString().substring(0,18),
+                            style: const TextStyle(fontSize: 15)),
                       ),
                       const SizedBox(height: 10),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Text('\$${ApiService.categoriesList[index]['price']}',style: const TextStyle(fontSize: 12)),
-                          const Row(
-                            children: [
-                              CircleAvatar(
-                              radius: 6,
-                                backgroundColor: Colors.black,
-                              ),
-                              CircleAvatar(
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('\$${ApiService.categoriesList[index]['price']}',style: const TextStyle(fontSize: 15)),
+                            const Row(
+                              children: [
+                                CircleAvatar(
                                 radius: 6,
-                                backgroundColor: Colors.blue,
-                              ),
-                              CircleAvatar(
-                                radius: 6,
-                                backgroundColor: Colors.red,
-                              ),
-                            ],
-                          ),
-                         
-                        ],
+                                  backgroundColor: Colors.black,
+                                ),
+                                CircleAvatar(
+                                  radius: 6,
+                                  backgroundColor: Colors.blue,
+                                ),
+                                CircleAvatar(
+                                  radius: 6,
+                                  backgroundColor: Colors.red,
+                                ),
+                              ],
+                            ),
+                           
+                          ],
+                        ),
                       ),
                 
                      
