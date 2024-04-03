@@ -43,16 +43,18 @@ class HomeScreen extends StatelessWidget {
           const CategoriesList(),
           const SizedBox(height: 20),
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: EdgeInsets.symmetric(horizontal: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text('Special For You',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600)),
                 Text('See all',style: TextStyle(color: Colors.grey.shade700)),
+                
               ],
             ),
           ),
           const SizedBox(height: 20),
+        
           const ProductListScreen()
           
         ],

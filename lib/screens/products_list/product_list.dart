@@ -13,6 +13,7 @@ class ProductListScreen extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: GridView.builder(
+          padding: EdgeInsets.zero,
           itemCount: ApiService.categoriesList.length,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
@@ -23,6 +24,7 @@ class ProductListScreen extends StatelessWidget {
           itemBuilder: (context, index) {
             return Stack(
               children: [
+                
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(21),
@@ -39,27 +41,26 @@ class ProductListScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 10),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Text('\$${ApiService.categoriesList[index]['price']}',style: const TextStyle(fontSize: 12)),
-                          const SizedBox(
-                            height: 15,
-                            child: CircleAvatar(
-                              backgroundColor: Colors.black,
-                            ),
+                          const Row(
+                            children: [
+                              CircleAvatar(
+                              radius: 6,
+                                backgroundColor: Colors.black,
+                              ),
+                              CircleAvatar(
+                                radius: 6,
+                                backgroundColor: Colors.blue,
+                              ),
+                              CircleAvatar(
+                                radius: 6,
+                                backgroundColor: Colors.red,
+                              ),
+                            ],
                           ),
-                          const SizedBox(
-                            height: 15,
-                            child: CircleAvatar(
-                              backgroundColor: Colors.blue,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 15,
-                            child: CircleAvatar(
-                              backgroundColor: Colors.red,
-                            ),
-                          ),
+                         
                         ],
                       ),
                 
