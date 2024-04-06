@@ -142,19 +142,17 @@ class ProductDetailPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Container(
-                          padding: EdgeInsets.all(8),
+                          padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
                             color: Colors.orange,
                             borderRadius: BorderRadius.circular(21)
                           ),
-                          child: Text('Description'),
+                          child: const Text('Description'),
                         ),
+                        const Text('Specifications'),
                         Container(
-                          child: Text('Specifications'),
-                        ),
-                        Container(
-                          padding: EdgeInsets.only(right: 20),
-                          child: Text('Reviews'),
+                          padding: const EdgeInsets.only(right: 20),
+                          child: const Text('Reviews'),
                         ),
                       ],
                     ),
