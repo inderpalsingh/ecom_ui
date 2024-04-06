@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget{
     return MaterialApp(
       title: 'Ecom UI',
       theme: ThemeData(useMaterial3: true, fontFamily: GoogleFonts.poppins().fontFamily),
-      home: HomeScreen(),
+      home: ProductDetailPage(),
     );
   }
 }

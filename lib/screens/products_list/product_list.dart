@@ -1,3 +1,4 @@
+import 'package:ecom_ui/screens/product_details/detail_page.dart';
 import 'package:ecom_ui/services/api_service.dart';
 import 'package:flutter/material.dart';
 
@@ -64,7 +65,7 @@ class ProductListScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-                
+                                  
                      
                       
                     ],
