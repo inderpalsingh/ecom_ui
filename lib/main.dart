@@ -1,3 +1,4 @@
+import 'package:ecom_ui/screens/product_details/detail_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'screens/home_screen.dart';

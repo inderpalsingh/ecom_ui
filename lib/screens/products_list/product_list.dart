@@ -2,6 +2,7 @@ import 'package:ecom_ui/services/api_service.dart';
 import 'package:flutter/material.dart';
 
 class ProductListScreen extends StatelessWidget {
+
   const ProductListScreen({super.key});
   
   @override
@@ -21,7 +22,6 @@ class ProductListScreen extends StatelessWidget {
           itemBuilder: (context, index) {
             return Stack(
               children: [
-                
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(21),
