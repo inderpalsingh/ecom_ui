@@ -1,21 +1,24 @@
-import 'package:ecom_ui/screens/product_details/detail_page.dart';
+import 'package:ecom_ui/screens/login/login_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp( MyApp());
+  runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget{
-  
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Ecom UI',
-      theme: ThemeData(useMaterial3: true, fontFamily: GoogleFonts.poppins().fontFamily),
-      home: ProductDetailPage(),
+      theme: ThemeData(
+        useMaterial3: true,
+        fontFamily: GoogleFonts.poppins().fontFamily,
+      ),
+      home: const LoginPage(),
     );
   }
 }
