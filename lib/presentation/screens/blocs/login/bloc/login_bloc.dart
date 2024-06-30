@@ -10,12 +10,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   UserRepository userRepository;
   LoginBloc({required this.userRepository}) : super(LoginInitialState())  {
 
-    on<LoginEvent>((event, emit) async {
+    on<UserLoginEvent>((event, emit) async {
       emit(LoginLoadingState());
 
       try {
 
-        var resJson = await userRepository.loginRepository(event.username, event.password);
+        var resJson = await userRepository.loginRepository(username: event.username, password: event.password);
+
 
       } catch (e) {
 
