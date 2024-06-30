@@ -1,13 +1,12 @@
-import 'package:ecom_ui/screens/categories_list/categories_list.dart';
-import 'package:ecom_ui/screens/products_list/product_list.dart';
-import 'package:ecom_ui/screens/top_screen/top_screen.dart';
-import 'package:ecom_ui/services/api_service.dart';
+import 'categories_list/categories_list.dart';
+import 'products_list/product_list.dart';
+import 'top_screen/top_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
-  
-  
-  
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,20 +43,20 @@ class HomeScreen extends StatelessWidget {
           const CategoriesList(),
           const SizedBox(height: 20),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text('Special For You',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600)),
                 Text('See all',style: TextStyle(color: Colors.grey.shade700)),
-                
+
               ],
             ),
           ),
           const SizedBox(height: 20),
-        
+
           const ProductListScreen()
-          
+
         ],
       ),
     );

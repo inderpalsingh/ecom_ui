@@ -1,6 +1,6 @@
-import 'package:ecom_ui/screens/login/login_page.dart';
-import 'package:google_fonts/google_fonts.dart';
 
+import 'package:google_fonts/google_fonts.dart';
+import 'package:ecom_ui/presentation/screens/login/login_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         fontFamily: GoogleFonts.poppins().fontFamily,
       ),
-      home: const LoginPage(),
+      home: LoginPage(),
     );
   }
 }

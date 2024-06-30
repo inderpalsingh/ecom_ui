@@ -1,11 +1,11 @@
-import 'package:ecom_ui/screens/product_details/detail_page.dart';
+
 import 'package:ecom_ui/services/api_service.dart';
 import 'package:flutter/material.dart';
 
 class ProductListScreen extends StatelessWidget {
 
   const ProductListScreen({super.key});
-  
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -61,13 +61,13 @@ class ProductListScreen extends StatelessWidget {
                                 ),
                               ],
                             ),
-                           
+
                           ],
                         ),
                       ),
-                                  
-                     
-                      
+
+
+
                     ],
                   )
                 ),
@@ -84,9 +84,9 @@ class ProductListScreen extends StatelessWidget {
                 Container(
                   margin: const EdgeInsets.only(left: 157,top: 2),
                   child: Image.asset('assets/icons/empty-heart.png',width: 20,height: 30,color: Colors.white,),
-                  
+
                 ),
-                
+
               ],
             );
           },
