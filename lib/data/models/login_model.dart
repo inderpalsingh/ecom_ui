@@ -1,5 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-class LoginModel {
+class UserModel {
   int? id;
   String? username;
   String? email;
@@ -10,7 +10,7 @@ class LoginModel {
   String? token;
   String? refreshToken;
 
-  LoginModel({
+  UserModel({
     required this.id,
     required this.username,
     required this.email,
@@ -22,8 +22,8 @@ class LoginModel {
     required this.refreshToken,
   });
 
-  factory LoginModel.fromJSON(Map<String, dynamic> loginJSON) {
-    return LoginModel(
+  factory UserModel.fromJSON(Map<String, dynamic> loginJSON) {
+    return UserModel(
       id: loginJSON['id'],
       username: loginJSON['username'],
       email: loginJSON['email'],
