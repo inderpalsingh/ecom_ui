@@ -5,26 +5,21 @@ import 'package:http/http.dart' as http;
 
 import '../utils/api_exceptions.dart';
 
-class RemoteApiService{
+class RemoteApiService {
+  Future<dynamic> userLogin({required String baseUrl, required String username, required String password}) async {
+    try {
 
-  Future<dynamic> userLogin({required String baseUrl}) async{
+      http.Response response = await http.post( Uri.parse(baseUrl),body: {username: username, password: password}
 
-    try{
-
-      http.Response response = await http.get(Uri.parse(baseUrl),headers: {
-        'Content-Type': 'application/json',
-      });
+      );
 
       return returnJsonResponse(response);
     } on SocketException catch (e) {
       throw (FetchDataExecption(errorMsg: 'No Internet!! \n$e'));
     }
-
   }
 
-
-
-   /// create function
+  /// create function
   dynamic returnJsonResponse(http.Response jsonResponse) {
     switch (jsonResponse.statusCode) {
       case 200:
