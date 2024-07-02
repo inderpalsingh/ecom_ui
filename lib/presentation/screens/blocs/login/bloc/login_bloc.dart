@@ -16,8 +16,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       try {
         var resJson = await userRepository.UserLoginRepository(username: event.username, password: event.password);
         if (resJson != null) {
+          if(resJson['message'] == "Invalid credentials"){
+            emit(UserFailedState(errorMsg: "Invalid credentials"));
+          }
           var varJson = UserModel.fromJSON(resJson);
-          emit(UserSuccessState(userModel: varJson.toString()));
+          emit(UserSuccessState(userModel: varJson));
         }
       } catch (e) {
         emit(UserFailedState(errorMsg: (e as ApiExceptions).toString()));
