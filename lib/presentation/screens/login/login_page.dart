@@ -61,6 +61,8 @@ class LoginPage extends StatelessWidget {
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Something went wrong !!')));
                     }
                     if (state is UserSuccessState) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(backgroundColor: Colors.green,content: Text('User logged in successfully')));
                       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeScreen()));
                     }
                   },
@@ -70,8 +72,6 @@ class LoginPage extends StatelessWidget {
                       ElevatedButton(
                           style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
                           onPressed: () {
-                            print(userController.text.toString());
-                            print(passController.text.toString());
                             if (userController.text.isNotEmpty && passController.text.isNotEmpty) {
                               context.read<LoginBloc>().add(UserLoginEvent(
                                     username: userController.text.toUpperCase().toString(),

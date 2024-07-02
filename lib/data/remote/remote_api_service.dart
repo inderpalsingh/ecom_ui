@@ -8,11 +8,15 @@ import '../../utils/api_exceptions.dart';
 class RemoteApiService {
   Future<dynamic> userLogin({required String baseUrl, required String username, required String password,int expiresInMins = 30}) async {
     try {
-      http.Response response = await http.post(
-        Uri.parse(baseUrl),
+      http.Response response = await http.post(Uri.parse(baseUrl),
+        body: json.encode({
+            'username': username,
+            'password': password,
+        }),
         headers: {'Content-Type': 'application/json'},
-        body: {username: username, password: password, expiresInMins: expiresInMins},
       );
+      // Log the entire response body
+      print('Response Body: ${response.body.toString()}');
 
       return returnJsonResponse(response);
     } on SocketException catch (e) {
