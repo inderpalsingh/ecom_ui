@@ -14,10 +14,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       emit(UserLoadingState());
 
       try {
-        var resJson = await userRepository.loginRepository(username: event.username, password: event.password);
+        var resJson = await userRepository.UserLoginRepository(username: event.username, password: event.password);
         if (resJson != null) {
           var varJson = UserModel.fromJSON(resJson);
-          emit(UserSuccessState(userModel: varJson));
+          emit(UserSuccessState(userModel: varJson.toString()));
         }
       } catch (e) {
         emit(UserFailedState(errorMsg: (e as ApiExceptions).toString()));

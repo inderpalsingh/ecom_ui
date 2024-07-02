@@ -3,19 +3,20 @@ import 'dart:io';
 
 import 'package:http/http.dart' as http;
 
-import '../utils/api_exceptions.dart';
+import '../../utils/api_exceptions.dart';
 
 class RemoteApiService {
-  Future<dynamic> userLogin({required String baseUrl, required String username, required String password}) async {
+  Future<dynamic> userLogin({required String baseUrl, required String username, required String password,int expiresInMins = 30}) async {
     try {
-
-      http.Response response = await http.post( Uri.parse(baseUrl),body: {username: username, password: password}
-
+      http.Response response = await http.post(
+        Uri.parse(baseUrl),
+        headers: {'Content-Type': 'application/json'},
+        body: {username: username, password: password, expiresInMins: expiresInMins},
       );
 
       return returnJsonResponse(response);
     } on SocketException catch (e) {
-      throw (FetchDataExecption(errorMsg: 'No Internet!! \n$e'));
+      throw FetchDataExecption(errorMsg: 'No Internet!! \n$e');
     }
   }
 
@@ -36,7 +37,8 @@ class RemoteApiService {
         throw UnauthorisedException(errorMsg: jsonResponse.body.toString());
 
       default:
-        throw '${jsonResponse.statusCode}';
+        // throw '${jsonResponse.statusCode}';
+        throw UnauthorisedException(errorMsg: jsonResponse.body.toString());
     }
   }
 }

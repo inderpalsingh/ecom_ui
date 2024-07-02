@@ -1,5 +1,5 @@
 import 'package:ecom_ui/presentation/screens/blocs/login/bloc/login_bloc.dart';
-import 'package:ecom_ui/presentation/screens/splash/splash_page.dart';
+import 'package:ecom_ui/presentation/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -11,6 +11,8 @@ class LoginPage extends StatelessWidget {
     TextEditingController userController = TextEditingController();
     TextEditingController passController = TextEditingController();
 
+
+
     return Scaffold(
         appBar: AppBar(title: const Text('Login')),
         body: Padding(
@@ -18,18 +20,29 @@ class LoginPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              TextField(
-
+              TextFormField(
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter email';
+                  }
+                  return null;
+                },
                 controller: userController,
                 decoration: InputDecoration(
-                    hintText: 'Email',
-                    prefixIcon: const Icon(Icons.email),
+                    hintText: 'Username',
+                    prefixIcon: const Icon(Icons.person_2_outlined),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                     )),
               ),
               const SizedBox(height: 20),
-              TextField(
+              TextFormField(
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter password';
+                  }
+                  return null;
+                },
                 controller: passController,
                 decoration: InputDecoration(
                     hintText: 'Password',
@@ -39,38 +52,46 @@ class LoginPage extends StatelessWidget {
                     )),
               ),
               const SizedBox(height: 50),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  ElevatedButton(
-                      style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
-                      onPressed: () {
-                        if (userController.text.isNotEmpty && passController.text.isNotEmpty) {
-                          context.read<LoginBloc>().add(UserLoginEvent(username: userController.text, password: passController.text));
+              BlocListener<LoginBloc, LoginState>(
+                  listener: (context, state) {
+                    if (state is UserLoadingState) {
+                      const Center(child: CircularProgressIndicator());
+                    }
+                    if (state is UserFailedState) {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Something went wrong !!')));
+                    }
+                    if (state is UserSuccessState) {
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+                    }
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      ElevatedButton(
+                          style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
+                          onPressed: () {
+                            print(userController.text.toString());
+                            print(passController.text.toString());
+                            if (userController.text.isNotEmpty && passController.text.isNotEmpty) {
+                              context.read<LoginBloc>().add(UserLoginEvent(
+                                    username: userController.text.toUpperCase().toString(),
+                                    password: passController.text.toString(),
+                                  ));
 
-                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const SplashPage()));
-                        }
-                        // else {
-                        //   ScaffoldMessenger.of(context).showSnackBar(
-                        //     const SnackBar(
-                        //       content: Text('Worng credentials !!'),
-                        //       behavior: SnackBarBehavior.floating,
-                        //     ),
-                        //   );
-                        // }
-                      },
-                      child: const Text(
-                        'Login',
-                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-                      )),
-                  ElevatedButton(
-                      style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
-                      onPressed: () {
-                        // Navigator.pop(context);
-                      },
-                      child: const Text('Cancel', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold))),
-                ],
-              )
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Invalid credentials !!')));
+                            }
+                          },
+
+                          child: const Text('Login', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold))),
+                      ElevatedButton(
+                          style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
+                          onPressed: () {
+                            // Navigator.pop(context);
+                          },
+                          child: const Text('Cancel', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold))),
+                    ],
+                  )),
             ],
           ),
         ));

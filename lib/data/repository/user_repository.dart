@@ -1,6 +1,6 @@
 
-import 'package:ecom_ui/services/base_url.dart';
-import 'package:ecom_ui/services/remote_api_service.dart';
+import 'package:ecom_ui/data/remote/base_url.dart';
+import 'package:ecom_ui/data/remote/remote_api_service.dart';
 
 class UserRepository{
 
@@ -8,7 +8,7 @@ class UserRepository{
 
   UserRepository({required this.remoteApiService});
 
-  Future<dynamic> loginRepository({required String username,required String password})async{
+  Future<dynamic> UserLoginRepository({required String username,required String password})async{
 
     try{
       return await remoteApiService.userLogin(baseUrl: BaseUrlService.LOGIN_URL, username: username, password: password);

@@ -1,5 +1,5 @@
 
-import 'package:ecom_ui/services/api_service.dart';
+import 'package:ecom_ui/data/remote/api_service_categories.dart';
 import 'package:flutter/material.dart';
 
 class ProductListScreen extends StatelessWidget {
