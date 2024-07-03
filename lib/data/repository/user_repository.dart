@@ -1,6 +1,6 @@
 
 import 'package:ecom_ui/data/remote/base_url.dart';
-import 'package:ecom_ui/data/remote/remote_api_service.dart';
+import 'package:ecom_ui/data/remote/login_api_service.dart';
 
 class UserRepository{
 

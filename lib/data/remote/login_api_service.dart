@@ -12,7 +12,7 @@ class RemoteApiService {
 
     try {
       http.Response response = await http.post(Uri.parse(baseUrl),
-        body: json.encode({
+        body: jsonEncode({
             'username': username,
             'password': password,
         }),
@@ -27,8 +27,8 @@ class RemoteApiService {
         final prefs = await SharedPreferences.getInstance();
 
         await prefs.setString('token', jsonReponse['token']);
-        String? getToken = prefs.getString('token');
-        print('getToken = > $getToken');
+        // String? getToken = prefs.getString('token');
+        // print('getToken = > $getToken');
 
       }
       return returnJsonResponse(response);

@@ -1,6 +1,6 @@
 import 'package:ecom_ui/data/repository/user_repository.dart';
 import 'package:ecom_ui/presentation/screens/blocs/login/bloc/login_bloc.dart';
-import 'package:ecom_ui/data/remote/remote_api_service.dart';
+import 'package:ecom_ui/data/remote/login_api_service.dart';
 import 'package:ecom_ui/presentation/screens/splash/splash_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
