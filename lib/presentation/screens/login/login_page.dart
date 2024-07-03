@@ -74,8 +74,8 @@ class LoginPage extends StatelessWidget {
                           onPressed: () {
                             if (userController.text.isNotEmpty && passController.text.isNotEmpty) {
                               context.read<LoginBloc>().add(UserLoginEvent(
-                                    username: userController.text.toUpperCase().toString(),
-                                    password: passController.text.toString(),
+                                    username: userController.text.trim().toUpperCase().toString(),
+                                    password: passController.text.trim().toString(),
                                   ));
 
                             } else {

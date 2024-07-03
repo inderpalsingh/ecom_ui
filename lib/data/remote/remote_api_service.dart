@@ -2,11 +2,14 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../utils/api_exceptions.dart';
 
 class RemoteApiService {
   Future<dynamic> userLogin({required String baseUrl, required String username, required String password,int expiresInMins = 30}) async {
+
+
     try {
       http.Response response = await http.post(Uri.parse(baseUrl),
         body: json.encode({
@@ -15,9 +18,19 @@ class RemoteApiService {
         }),
         headers: {'Content-Type': 'application/json'},
       );
-      // Log the entire response body
-      print('Response Body: ${response.body.toString()}');
 
+      // Log the entire response body
+      // print('Response Body: ${response.body.toString()}');
+
+      if(response.statusCode == 200){
+        final jsonReponse = jsonDecode(response.body);
+        final prefs = await SharedPreferences.getInstance();
+
+        await prefs.setString('token', jsonReponse['token']);
+        String? getToken = prefs.getString('token');
+        print('getToken = > $getToken');
+
+      }
       return returnJsonResponse(response);
     } on SocketException catch (e) {
       throw FetchDataExecption(errorMsg: 'No Internet!! \n$e');
