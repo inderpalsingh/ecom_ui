@@ -1,14 +1,24 @@
+import 'package:ecom_ui/presentation/screens/profile/profile_page.dart';
+
 import 'categories_list/categories_list.dart';
 import 'products_list/product_list.dart';
 import 'top_screen/top_screen.dart';
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
 
 
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int currentIndex = 0;
+  @override
   Widget build(BuildContext context) {
+
+
 
     return Scaffold(
       body: Column(
@@ -60,6 +70,47 @@ class HomeScreen extends StatelessWidget {
 
         ],
       ),
+
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: currentIndex,
+        selectedItemColor: Colors.red,
+        unselectedItemColor: Colors.grey,
+        onTap: (value) {
+          setState(() {
+            currentIndex = value;
+            switch (currentIndex){
+              case 0:
+                // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> HomeScreen()));
+                break;
+              case 1:
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> const ProfilePage()));
+                break;
+              case 2:
+                print('object 2');
+                break;
+            }
+          });
+
+        },
+        items: const [
+        BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
+          ),
+
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Settings',
+          ),
+
+        ]
+      ),
     );
+
+
   }
 }

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:ecom_ui/utils/token_shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -19,16 +20,15 @@ class RemoteApiService {
         headers: {'Content-Type': 'application/json'},
       );
 
-      // Log the entire response body
-      // print('Response Body: ${response.body.toString()}');
-
       if(response.statusCode == 200){
         final jsonReponse = jsonDecode(response.body);
-        final prefs = await SharedPreferences.getInstance();
+        // final prefs = await SharedPreferences.getInstance();
+      //   print('jsonReponse => $jsonReponse');
 
-        await prefs.setString('token', jsonReponse['token']);
-        // String? getToken = prefs.getString('token');
-        // print('getToken = > $getToken');
+        // await prefs.setString('token', jsonReponse['token']);
+        TokenPrefs().setToken(token: jsonReponse['token']);
+      // //   // String? getToken = prefs.getString('token');
+      // //   // print('getToken = > $getToken');
 
       }
       return returnJsonResponse(response);
@@ -42,6 +42,7 @@ class RemoteApiService {
     switch (jsonResponse.statusCode) {
       case 200:
         var mData = jsonDecode(jsonResponse.body);
+
         return mData;
 
       case 400:
