@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:ecom_ui/data/models/categories_model.dart';
 import 'package:http/http.dart' as http;
 
 import '../../utils/api_exceptions.dart';

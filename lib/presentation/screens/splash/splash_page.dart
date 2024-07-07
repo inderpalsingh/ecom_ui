@@ -21,13 +21,13 @@ class _SplashPageState extends State<SplashPage> {
 
 
   void checkUserLogin() async {
-    // SharedPreferences prefs = await SharedPreferences.getInstance();
-    // String? tokenKey = prefs.getString('token');
-    String tokenKey = await TokenPrefs().getToken();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? tokenKey = prefs.getString('token');
+    // String tokenKey = await TokenPrefs().getToken();
     print('tokenKey => $tokenKey');
 
 
-    if(tokenKey != ''){
+    if(tokenKey != null){
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeScreen()));
     }else{
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginPage()));

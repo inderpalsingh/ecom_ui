@@ -4,6 +4,6 @@ part of 'categories_bloc.dart';
 sealed class CategoriesEvent {}
 
 
-class GetAllCategoriesEvent extends CategoriesEvent{
+class CategoriesAllEvent extends CategoriesEvent{
 
 }

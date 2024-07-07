@@ -1,4 +1,6 @@
+import 'package:ecom_ui/presentation/screens/blocs/categories/bloc/categories_bloc.dart';
 import 'package:ecom_ui/presentation/screens/profile/profile_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'categories_list/categories_list.dart';
 import 'products_list/product_list.dart';
@@ -6,6 +8,8 @@ import 'top_screen/top_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
 
 
 
@@ -15,6 +19,9 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int currentIndex = 0;
+
+
+
   @override
   Widget build(BuildContext context) {
 
@@ -51,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Image.asset('assets/images/shoe-sale-banner-vector.jpg')),
           ),
           const SizedBox(height: 20),
-          const CategoriesList(),
+          CategoriesList(),
           const SizedBox(height: 20),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 20),
