@@ -30,7 +30,7 @@ class Products {
   double? price;
   double? rating;
   int? stock;
-  List<String>? images;
+  List<dynamic>? images;
   String? thumbnail;
 
   Products({

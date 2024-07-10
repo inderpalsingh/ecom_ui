@@ -1,34 +1,29 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:ecom_ui/utils/api_exceptions.dart';
 import 'package:http/http.dart' as http;
 
-import '../../utils/api_exceptions.dart';
+class ProductApiService{
 
-class CategoriesApiService{
-
-
-  Future<dynamic> getAllCategoriesApiService({required baseUrl})async{
+  Future<dynamic> getAllProductApiService({required String baseUrl})async{
 
     try {
-
-      http.Response response = await http.get(Uri.parse(baseUrl)) ;
+      http.Response response = await http.get(Uri.parse(baseUrl));
+      // print('response ==> $response');
       return returnJsonResponse(response);
-
     } on SocketException catch (e) {
       throw FetchDataExecption(errorMsg: 'No Internet!! \n$e');
     }
 
-
   }
-
 
 
   returnJsonResponse(http.Response jsonResponse) {
     switch (jsonResponse.statusCode) {
       case 200:
         var mData = jsonDecode(jsonResponse.body);
-
+        print('response ==> $mData');
         return mData;
 
       case 400:
@@ -45,6 +40,4 @@ class CategoriesApiService{
         throw UnauthorisedException(errorMsg: jsonResponse.body.toString());
     }
   }
-
-
 }

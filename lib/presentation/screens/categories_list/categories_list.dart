@@ -1,3 +1,4 @@
+
 import 'package:ecom_ui/data/models/categories_model.dart';
 import 'package:ecom_ui/presentation/screens/blocs/categories/bloc/categories_bloc.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,7 @@ class CategoriesList extends StatefulWidget {
 }
 
 class _CategoriesListState extends State<CategoriesList> {
-  CategoriesModel? myData;
+    CategoriesModel? myData;
 
   @override
   void initState() {
@@ -30,15 +31,14 @@ class _CategoriesListState extends State<CategoriesList> {
             return Center(child: Text(state.errorMsg));
           }
           if (state is CategoriesSuccessState) {
-            myData = state.categoriesModel;
-            return  ListView.builder(
+
+            return ListView.builder(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
-                itemCount: myData!.name.length,
+                itemCount: state.categoriesModel.length,
                 itemBuilder: (context, index) {
-                  // print('object =>> ${myData!.name!.length}');
-                  print('object =>> ${state.categoriesModel.slug.toString()}');
+                  myData = state.categoriesModel[index];
 
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -47,13 +47,13 @@ class _CategoriesListState extends State<CategoriesList> {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(100),
                           child: Image.network(
-                            myData!.url,
+                            myData!.url.toString(),
                             height: 80,
                             width: 80,
                           ),
                         ),
                         Text(
-                          myData!.name.toString(),
+                          state.categoriesModel[index].name,
                           style: const TextStyle(fontSize: 12),
                         )
                       ],

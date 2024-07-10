@@ -16,9 +16,14 @@ class CategoriesBloc extends Bloc<CategoriesEvent, CategoriesState> {
       try {
         var resposeJson = await categoriesRepository.getAllCategoriesRepository();
         if(resposeJson!=null){
-          var respData = CategoriesModel.fromJSON(resposeJson);
-          print('CategoriesBloc ===>> $respData');
-          emit(CategoriesSuccessState(categoriesModel: respData));
+          List<CategoriesModel> mCat = [];
+          for(Map<String,dynamic> eachCat in resposeJson){
+            var respData = CategoriesModel.fromJSON(eachCat);
+            mCat.add(respData);
+          }
+
+          // print('CategoriesBloc ===>> $respData');
+          emit(CategoriesSuccessState(categoriesModel: mCat));
         }
 
       } catch (e) {

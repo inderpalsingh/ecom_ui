@@ -1,6 +1,4 @@
-import 'package:ecom_ui/presentation/screens/blocs/categories/bloc/categories_bloc.dart';
 import 'package:ecom_ui/presentation/screens/profile/profile_page.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'categories_list/categories_list.dart';
 import 'products_list/product_list.dart';
@@ -10,9 +8,6 @@ import 'package:flutter/material.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
-
-
-
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -20,13 +15,13 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int currentIndex = 0;
 
-
+  final bottomNavigationScreens =[
+    HomeScreen(),
+    ProfilePage(),
+  ];
 
   @override
   Widget build(BuildContext context) {
-
-
-
     return Scaffold(
       body: Column(
         children: [
@@ -38,24 +33,22 @@ class _HomeScreenState extends State<HomeScreen> {
             margin: const EdgeInsets.symmetric(horizontal: 20),
             child: TextField(
               decoration: InputDecoration(
-                  fillColor: Colors.grey.shade100,
-                  filled: true,
-                  prefixIcon: const Icon(Icons.search),
-                  suffixIcon: const Icon(Icons.filter_list_outlined),
-                  hintText: 'Search..',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(50),
-                    borderSide: const BorderSide(color: Colors.blue, width: 2.0),
-                  ),
+                fillColor: Colors.grey.shade100,
+                filled: true,
+                prefixIcon: const Icon(Icons.search),
+                suffixIcon: const Icon(Icons.filter_list_outlined),
+                hintText: 'Search..',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(50),
+                  borderSide: const BorderSide(color: Colors.blue, width: 2.0),
+                ),
               ),
             ),
           ),
           const SizedBox(height: 20),
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 20),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-                child: Image.asset('assets/images/shoe-sale-banner-vector.jpg')),
+            child: ClipRRect(borderRadius: BorderRadius.circular(20), child: Image.asset('assets/images/shoe-sale-banner-vector.jpg')),
           ),
           const SizedBox(height: 20),
           CategoriesList(),
@@ -65,59 +58,51 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text('Special For You',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600)),
-                Text('See all',style: TextStyle(color: Colors.grey.shade700)),
-
+                const Text('Special For You', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+                Text('See all', style: TextStyle(color: Colors.grey.shade700)),
               ],
             ),
           ),
           const SizedBox(height: 20),
-
-          const ProductListScreen()
-
+          ProductListScreen()
         ],
       ),
+      bottomNavigationBar: NavigationBarTheme(
+        data: NavigationBarThemeData(
+          indicatorColor: Colors.blue.shade100
+        ),
+        child: NavigationBar(
+          height: 60,
+          onDestinationSelected: (value) {
+            setState(() {
+              currentIndex = value;
+            });
+          },
+          labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+          animationDuration: const Duration(seconds: 3),
+          selectedIndex: currentIndex,
+          destinations: const [
+            NavigationDestination(
+              icon: Icon(Icons.home),
+                label: 'Home',
+                selectedIcon: Icon(Icons.home),
+            ),
+             NavigationDestination(
+              icon: Icon(Icons.person),
+                label: 'Profile',
+            ),
+             NavigationDestination(
+              icon: Icon(Icons.settings),
+                label: 'Settings',
+            ),
+             NavigationDestination(
+              icon: Icon(Icons.logout_outlined),
+                label: 'Logout',
+            ),
+          ],
 
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: currentIndex,
-        selectedItemColor: Colors.red,
-        unselectedItemColor: Colors.grey,
-        onTap: (value) {
-          setState(() {
-            currentIndex = value;
-            switch (currentIndex){
-              case 0:
-                // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> HomeScreen()));
-                break;
-              case 1:
-                Navigator.push(context, MaterialPageRoute(builder: (context)=> const ProfilePage()));
-                break;
-              case 2:
-                print('object 2');
-                break;
-            }
-          });
-
-        },
-        items: const [
-        BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
-          ),
-
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
-          ),
-
-        ]
       ),
     );
-
-
   }
 }
