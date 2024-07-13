@@ -63,7 +63,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 10),
                               child: FittedBox(
-                                fit: BoxFit.cover,
+                                fit: BoxFit.fitWidth,
                                 child: Text(myData!.products![index].title.toString(), style: const TextStyle(fontSize: 15))),
                             ),
                             const SizedBox(height: 10),

@@ -91,9 +91,6 @@ class CustomCart extends StatelessWidget {
             ),
           ),
         )
-
-
-
       ],
     );
   }

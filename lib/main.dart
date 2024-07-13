@@ -5,7 +5,7 @@ import 'package:ecom_ui/data/repository/products_repository.dart';
 import 'package:ecom_ui/data/repository/user_repository.dart';
 import 'package:ecom_ui/presentation/screens/blocs/categories/bloc/categories_bloc.dart';
 import 'package:ecom_ui/presentation/screens/blocs/login/bloc/login_bloc.dart';
-import 'package:ecom_ui/data/remote/login_api_service.dart';
+import 'package:ecom_ui/data/remote/user_api_service.dart';
 import 'package:ecom_ui/presentation/screens/blocs/products/bloc/products_bloc.dart';
 import 'package:ecom_ui/presentation/screens/cart/cart_page.dart';
 import 'package:ecom_ui/presentation/screens/splash/splash_page.dart';
@@ -16,19 +16,11 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(MultiBlocListener(listeners: [
     /// user
-    BlocProvider(
-      create: (context) => LoginBloc(userRepository: UserRepository(remoteApiService: RemoteApiService())),
-    ),
-
+    BlocProvider(create: (context) => LoginBloc(userRepository: UserRepository(remoteApiService: RemoteApiService()))),
     /// categories
-    BlocProvider(
-      create: (context) => CategoriesBloc(categoriesRepository: CategoriesRepository(categoriesApiService: CategoriesApiService())),
-    ),
-
+    BlocProvider(create: (context) => CategoriesBloc(categoriesRepository: CategoriesRepository(categoriesApiService: CategoriesApiService()))),
     /// products
-    BlocProvider(
-      create: (context) => ProductsBloc(productsRepository: ProductsRepository(productApiService: ProductApiService())),
-    )
+    BlocProvider(create: (context) => ProductsBloc(productsRepository: ProductsRepository(productApiService: ProductApiService()))),
   ], child: const MyApp()));
 }
 
@@ -43,7 +35,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         fontFamily: GoogleFonts.poppins().fontFamily,
       ),
-      home: const MyCart(),
+      home: const SplashPage(),
     );
   }
 }

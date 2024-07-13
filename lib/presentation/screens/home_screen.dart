@@ -1,9 +1,8 @@
-import 'package:ecom_ui/presentation/screens/profile/profile_page.dart';
+import 'package:flutter/material.dart';
 
 import 'categories_list/categories_list.dart';
 import 'products_list/product_list.dart';
 import 'top_screen/top_screen.dart';
-import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -13,17 +12,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int currentIndex = 0;
-
-  final bottomNavigationScreens =[
-    HomeScreen(),
-    ProfilePage(),
-  ];
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
+    return Column(
         children: [
           const SizedBox(height: 50),
           const TopScreen(),
@@ -48,7 +39,10 @@ class _HomeScreenState extends State<HomeScreen> {
           const SizedBox(height: 20),
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 20),
-            child: ClipRRect(borderRadius: BorderRadius.circular(20), child: Image.asset('assets/images/shoe-sale-banner-vector.jpg')),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+                child: Image.asset('assets/images/shoe-sale-banner-vector.jpg'),
+            ),
           ),
           const SizedBox(height: 20),
           CategoriesList(),
@@ -66,43 +60,6 @@ class _HomeScreenState extends State<HomeScreen> {
           const SizedBox(height: 20),
           ProductListScreen()
         ],
-      ),
-      bottomNavigationBar: NavigationBarTheme(
-        data: NavigationBarThemeData(
-          indicatorColor: Colors.blue.shade100
-        ),
-        child: NavigationBar(
-          height: 60,
-          onDestinationSelected: (value) {
-            setState(() {
-              currentIndex = value;
-            });
-          },
-          labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-          animationDuration: const Duration(seconds: 3),
-          selectedIndex: currentIndex,
-          destinations: const [
-            NavigationDestination(
-              icon: Icon(Icons.home),
-                label: 'Home',
-                selectedIcon: Icon(Icons.home),
-            ),
-             NavigationDestination(
-              icon: Icon(Icons.person),
-                label: 'Profile',
-            ),
-             NavigationDestination(
-              icon: Icon(Icons.settings),
-                label: 'Settings',
-            ),
-             NavigationDestination(
-              icon: Icon(Icons.logout_outlined),
-                label: 'Logout',
-            ),
-          ],
-
-          ),
-      ),
-    );
+      );
   }
 }
