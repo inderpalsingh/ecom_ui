@@ -7,14 +7,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../utils/api_exceptions.dart';
 
 class RemoteApiService {
-  Future<dynamic> userLogin({required String baseUrl, required String username, required String password, int expiresInMins = 30}) async {
+  Future<dynamic> userLogin({required String baseUrl, required String email, required String password}) async {
     final prefs = await SharedPreferences.getInstance();
 
     try {
-      http.Response response = await http.post(
-        Uri.parse(baseUrl),
+      http.Response response = await http.post(Uri.parse(baseUrl),
         body: jsonEncode({
-          'username': username,
+          'email': email,
           'password': password,
         }),
         headers: {'Content-Type': 'application/json'},
@@ -25,7 +24,7 @@ class RemoteApiService {
 
         print('jsonReponse => $jsonReponse');
 
-        await prefs.setString('token', jsonReponse['token']);
+        await prefs.setString('token', jsonReponse['tokan']);
         // TokenPrefs().setToken(token: jsonReponse['token']);
         // String? getToken = prefs.getString('token');
         // print('getToken = > $getToken');

@@ -43,22 +43,11 @@ class _LoginPageState extends State<LoginPage> {
                     }
                     return null;
                   },
-                  onChanged: (value) {
-                    setState(() {
-                      if (value.contains(' ') || !checkEmailCorrect(value)) {
-                      errorValue='Email is not valid';
-                      }else{
-                        errorValue='';
-                      }
-                    });
-
-                  },
-
                   controller: userController,
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
                     errorText: errorValue.isEmpty?null: 'Enter correct email !!',
-                      hintText: 'Username',
+                      hintText: 'Email',
                       prefixIcon: const Icon(Icons.person_2_outlined),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -108,7 +97,7 @@ class _LoginPageState extends State<LoginPage> {
                                 onPressed: () {
                                   if (userController.text.isNotEmpty && passController.text.isNotEmpty) {
                                     context.read<LoginBloc>().add(UserLoginEvent(
-                                          username: userController.text.trim().toString(),
+                                          email: userController.text.trim().toString(),
                                           password: passController.text.trim().toString(),
                                         ));
 
@@ -126,7 +115,7 @@ class _LoginPageState extends State<LoginPage> {
                                 child: const Text('Cancel', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)))
                           ],
                         ),
-                        const SizedBox(height: 10,),
+                        const SizedBox(height: 20,),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -135,7 +124,7 @@ class _LoginPageState extends State<LoginPage> {
                               onTap: () {
                                 Navigator.push(context, MaterialPageRoute(builder: (context)=> SignupPage()));
                               },
-                                child: const Text('SignUp',style: TextStyle(color: Colors.redAccent,fontWeight: FontWeight.bold)))
+                                child: const Text(' SignUp',style: TextStyle(color: Colors.redAccent,fontWeight: FontWeight.bold)))
                           ],
                         )
                       ],

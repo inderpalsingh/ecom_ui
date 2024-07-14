@@ -1,5 +1,6 @@
 
 import 'package:ecom_ui/presentation/screens/blocs/signup/signup_bloc.dart';
+import 'package:ecom_ui/presentation/screens/login/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -157,7 +158,7 @@ class _SignupPageState extends State<SignupPage> {
                       if (state is SignupSuccessfulState) {
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(backgroundColor: Colors.green,content: Text('User logged in successfully')));
-                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const IndexScreen()));
+
                       }
                     },
                     child: Row(
@@ -173,7 +174,7 @@ class _SignupPageState extends State<SignupPage> {
                                   email: emailController.text.toString(),
                                   mobile_number: mobileController.text.toString()
                                 ));
-
+                                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginPage()));
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Invalid credentials !!')));
                               }

@@ -15,9 +15,9 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
 
       try {
         var responseData = await registerRepository.registerRepository(name: event.name, mobile_number: event.mobile_number.toString(), email: event.email, password: event.password);
-        print('responseData ==> $responseData');
+        // print('responseData ==> $responseData');
         dynamic jsonData = jsonEncode(responseData['status']);
-        print('jsonData ==> $jsonData');
+        // print('jsonData ==> $jsonData');
         if(jsonData){
           emit(SignupSuccessfulState());
         } else{

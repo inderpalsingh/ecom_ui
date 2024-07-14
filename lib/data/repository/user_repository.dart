@@ -8,10 +8,10 @@ class UserRepository{
 
   UserRepository({required this.remoteApiService});
 
-  Future<dynamic> userLoginRepository({required String username,required String password})async{
+  Future<dynamic> userLoginRepository({required String email,required String password})async{
 
     try{
-      return await remoteApiService.userLogin(baseUrl: BaseUrlService.LOGIN_URL, username: username, password: password);
+      return await remoteApiService.userLogin(baseUrl: BaseUrlService.LOGIN_URL, email: email, password: password);
     } catch (e){
       rethrow;
     }
