@@ -23,7 +23,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           emit(UserSuccessState(userModel: varJson));
         }
       } catch (e) {
-        emit(UserFailedState(errorMsg: (e as ApiExceptions).toString()));
+        emit(UserFailedState(errorMsg: e.toString()));
       }
     });
   }

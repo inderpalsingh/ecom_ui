@@ -17,12 +17,4 @@ class UserRepository{
     }
   }
 
-
-  Future<dynamic> getUserRepository()async{
-    try {
-      return await remoteApiService.getUserLoggin(baseUrl: BaseUrlService.USER_ME);
-    } catch (e) {
-      rethrow;
-    }
-  }
 }
