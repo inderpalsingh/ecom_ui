@@ -40,11 +40,11 @@ class _ProductListScreenState extends State<ProductListScreen> {
 
             ProductModel myData = state.productModel;
 
-          return Container(
+          return  Container(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: GridView.builder(
               padding: EdgeInsets.zero,
-              itemCount: myData.data!.length,
+              itemCount: myData.data.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 crossAxisSpacing: 15,
@@ -52,7 +52,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
                 mainAxisSpacing: 15,
               ),
               itemBuilder: (context, index) {
-
+                print('Testing ===>> ${myData.data[index].toString()} ');
                 return Stack(
                   children: [
                     Container(
@@ -65,15 +65,20 @@ class _ProductListScreenState extends State<ProductListScreen> {
                             const SizedBox(height: 20),
                             InkWell(
                               onTap: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context)=> ProductDetailPage(productModel: myData.data[index])));
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=> ProductDetailPage(
+                                  mProdId: int.parse(myData.data[index].id.toString()),
+                                  image: myData.data[index].image.toString(),
+                                  name: myData.data[index].name.toString(),
+                                  price: myData.data[index].price.toString(),
+                                )));
                               },
-                              child: Image.network(myData.data![index].image.toString(), height: 80, width: 80)),
+                              child: Image.network(myData.data[index].image.toString(), height: 80, width: 80)),
                             const SizedBox(height: 10),
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 10),
                               child: FittedBox(
                                 fit: BoxFit.fitWidth,
-                                child: Text(myData.data![index].name.toString(), style: const TextStyle(fontSize: 15))),
+                                child: Text(myData.data[index].name.toString(), style: const TextStyle(fontSize: 15))),
                             ),
                             const SizedBox(height: 10),
                             Padding(
@@ -81,7 +86,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text('\$${myData.data![index].price.toString()}', style: const TextStyle(fontSize: 15)),
+                                  Text('\$${myData.data[index].price.toString()}', style: const TextStyle(fontSize: 15)),
                                   const Row(
                                     children: [
                                       CircleAvatar(

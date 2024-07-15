@@ -1,7 +1,7 @@
 class ProductModel {
   bool? status;
   String? message;
-  List<Products>? data;
+  List<Products> data;
 
   ProductModel({required this.status, required this.message,  required this.data});
 

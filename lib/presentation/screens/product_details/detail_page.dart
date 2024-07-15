@@ -1,14 +1,18 @@
-import 'package:ecom_ui/data/models/products_model.dart';
+
 import 'package:flutter/material.dart';
 
 class ProductDetailPage extends StatelessWidget {
-  ProductModel productModel;
-  ProductDetailPage({super.key,  required this.productModel});
+  int mProdId;
+  String image;
+  String name;
+  String price;
+
+  ProductDetailPage({super.key,  required this.mProdId, required this.image,required this.name, required this.price});
 
 
   @override
   Widget build(BuildContext context) {
-    print('currentItem ==> ${productModel.data!.length}');
+    print('currentItem ==> ${mProdId}');
 
     return Scaffold(
       backgroundColor: Colors.white70,
@@ -50,7 +54,7 @@ class ProductDetailPage extends StatelessWidget {
             Container(
               width: double.infinity,
               height: 300,
-              child: Image.asset('assets/images/vecteezy_apple-airpods-ai-generative_26782383.png'),
+              child: Image.network(image),
             ),
             Container(
               padding: const EdgeInsets.only(top: 20, left: 20),
@@ -63,14 +67,15 @@ class ProductDetailPage extends StatelessWidget {
               ),
               // child: const Text('Wireless Headphone',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
                     margin: const EdgeInsets.only(right: 190),
-                      child: const Text('Wireless Headphone',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold))
+                      child: Text(name.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold))
                   ),
                   Container(
                       padding: const EdgeInsets.only(right: 345),
-                      child: const Text('\$520.00',style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold))
+                      child: Text('\$${price.toString()}',style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold))
                   ),
                   const SizedBox(height: 10),
                   Container(
@@ -145,7 +150,7 @@ class ProductDetailPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  Container(
+                  SizedBox(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
