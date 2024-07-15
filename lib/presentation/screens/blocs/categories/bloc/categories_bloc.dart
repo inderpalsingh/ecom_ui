@@ -22,7 +22,7 @@ class CategoriesBloc extends Bloc<CategoriesEvent, CategoriesState> {
             mCat.add(respData);
           }
 
-          // print('CategoriesBloc ===>> $respData');
+          print('CategoriesBloc ===>> $mCat');
           emit(CategoriesSuccessState(categoriesModel: mCat));
         }
 

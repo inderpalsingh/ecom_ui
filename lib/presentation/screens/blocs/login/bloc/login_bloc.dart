@@ -14,10 +14,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       try {
         var resJson = await userRepository.userLoginRepository(email: event.email, password: event.password);
         if (resJson != null) {
-          if (resJson['message'] == "Invalid credentials") {
-            emit(UserFailedState(errorMsg: "Invalid credentials"));
+          if (resJson['status']) {
+            emit(UserSuccessState(msg: resJson['message']));
+          } else {
+            emit(UserFailedState(errorMsg: resJson['message']));
           }
-          emit(UserSuccessState());
         }
       } catch (e) {
         emit(UserFailedState(errorMsg: e.toString()));

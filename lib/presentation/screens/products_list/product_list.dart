@@ -1,10 +1,14 @@
 
 import 'package:ecom_ui/data/models/products_model.dart';
 import 'package:ecom_ui/presentation/screens/blocs/products/bloc/products_bloc.dart';
+import 'package:ecom_ui/presentation/screens/product_details/detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProductListScreen extends StatefulWidget {
+  const ProductListScreen({super.key});
+
+
   @override
   State<ProductListScreen> createState() => _ProductListScreenState();
 }
@@ -34,13 +38,13 @@ class _ProductListScreenState extends State<ProductListScreen> {
 
           if( state is ProductsSuccessState){
 
-            myData = state.productModel;
+            ProductModel myData = state.productModel;
 
           return Container(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: GridView.builder(
               padding: EdgeInsets.zero,
-              itemCount: myData!.products!.length,
+              itemCount: myData.data!.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 crossAxisSpacing: 15,
@@ -48,6 +52,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
                 mainAxisSpacing: 15,
               ),
               itemBuilder: (context, index) {
+
                 return Stack(
                   children: [
                     Container(
@@ -58,13 +63,17 @@ class _ProductListScreenState extends State<ProductListScreen> {
                         child: Column(
                           children: [
                             const SizedBox(height: 20),
-                            Image.network(myData!.products![index].thumbnail.toString(), height: 80, width: 80),
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=> ProductDetailPage(productModel: myData.data[index])));
+                              },
+                              child: Image.network(myData.data![index].image.toString(), height: 80, width: 80)),
                             const SizedBox(height: 10),
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 10),
                               child: FittedBox(
                                 fit: BoxFit.fitWidth,
-                                child: Text(myData!.products![index].title.toString(), style: const TextStyle(fontSize: 15))),
+                                child: Text(myData.data![index].name.toString(), style: const TextStyle(fontSize: 15))),
                             ),
                             const SizedBox(height: 10),
                             Padding(
@@ -72,7 +81,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text('\$${myData!.products![index].price.toString()}', style: const TextStyle(fontSize: 15)),
+                                  Text('\$${myData.data![index].price.toString()}', style: const TextStyle(fontSize: 15)),
                                   const Row(
                                     children: [
                                       CircleAvatar(

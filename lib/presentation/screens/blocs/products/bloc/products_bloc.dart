@@ -9,7 +9,6 @@ part 'products_state.dart';
 class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
   ProductsRepository productsRepository;
 
-
   ProductsBloc({required this.productsRepository}) : super(ProductsInitialState())  {
     on<ProductsInitialEvent>((event, emit) async {
 
@@ -17,12 +16,13 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
 
       try {
         var responseData = await productsRepository.getAllProductsRepository();
-        print('prodData ==> $responseData');
-        if(responseData !=null){
+        if(responseData != null){
           var prodData = ProductModel.fromJson(responseData);
-
           emit(ProductsSuccessState(productModel: prodData));
+        } else{
+          emit(ProductsFailedState(errorMgs: responseData['message']));
         }
+
       } catch (e) {
         emit(ProductsFailedState(errorMgs: e.toString()));
       }

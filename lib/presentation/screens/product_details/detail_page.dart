@@ -1,11 +1,15 @@
+import 'package:ecom_ui/data/models/products_model.dart';
 import 'package:flutter/material.dart';
 
 class ProductDetailPage extends StatelessWidget {
+  ProductModel productModel;
+  ProductDetailPage({super.key,  required this.productModel});
 
- const ProductDetailPage({super.key});
- 
+
   @override
   Widget build(BuildContext context) {
+    print('currentItem ==> ${productModel.data!.length}');
+
     return Scaffold(
       backgroundColor: Colors.white70,
       body: SingleChildScrollView(
@@ -15,13 +19,17 @@ class ProductDetailPage extends StatelessWidget {
             SizedBox(height: MediaQuery.of(context).size.height *.06),
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 20),
-              child: const Row(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CircleAvatar(
                       radius: 20,backgroundColor: Colors.white,
-                      child: Icon(Icons.arrow_back_ios)),
-                  Row(
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Icon(Icons.arrow_back_ios))),
+                  const Row(
                     children: [
                       CircleAvatar(
                         radius: 20,
@@ -160,8 +168,8 @@ class ProductDetailPage extends StatelessWidget {
                 ],
               ),
             ),
-            
-            
+
+
           ],
         ),
       ),

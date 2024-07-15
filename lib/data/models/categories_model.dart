@@ -1,15 +1,28 @@
 class CategoriesModel {
-  String slug;
-  String name;
-  String url;
+  String id;
+  String title;
+  String price;
+  String description;
+  String category;
+  String image;
 
-  CategoriesModel({required this.slug, required this.name, required this.url});
+  CategoriesModel({
+    required this.id,
+    required this.title,
+    required this.price,
+    required this.description,
+    required this.category,
+    required this.image,
+  });
 
   factory CategoriesModel.fromJSON(Map<String, dynamic> catJSON) {
     return CategoriesModel(
-      slug: catJSON['slug'],
-      name: catJSON['name'],
-      url: catJSON['url'],
+      id: catJSON['id'],
+      title: catJSON['title'],
+      price: catJSON['price'],
+      description: catJSON['description'],
+      category: catJSON['category'],
+      image: catJSON['image'],
     );
   }
 }
