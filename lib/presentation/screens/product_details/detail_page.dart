@@ -1,18 +1,16 @@
 
+import 'package:ecom_ui/data/models/products_model.dart';
 import 'package:flutter/material.dart';
 
 class ProductDetailPage extends StatelessWidget {
-  int mProdId;
-  String image;
-  String name;
-  String price;
+  Products products;
 
-  ProductDetailPage({super.key,  required this.mProdId, required this.image,required this.name, required this.price});
+  ProductDetailPage({super.key,required this.products});
 
 
   @override
   Widget build(BuildContext context) {
-    print('currentItem ==> ${mProdId}');
+    // print('currentItem ==> ${mProdId}');
 
     return Scaffold(
       backgroundColor: Colors.white70,
@@ -51,10 +49,10 @@ class ProductDetailPage extends StatelessWidget {
                 ],
               ),
             ),
-            Container(
+            SizedBox(
               width: double.infinity,
               height: 300,
-              child: Image.network(image),
+              child: Image.network(products.image.toString()),
             ),
             Container(
               padding: const EdgeInsets.only(top: 20, left: 20),
@@ -71,14 +69,14 @@ class ProductDetailPage extends StatelessWidget {
                 children: [
                   Container(
                     margin: const EdgeInsets.only(right: 190),
-                      child: Text(name.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold))
+                      child: Text(products.name.toString(),style: const TextStyle(fontSize: 20,fontWeight: FontWeight.bold))
                   ),
                   Container(
                       padding: const EdgeInsets.only(right: 345),
-                      child: Text('\$${price.toString()}',style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold))
+                      child: Text('\$${products.price.toString()}',style: const TextStyle(fontSize: 15,fontWeight: FontWeight.bold))
                   ),
                   const SizedBox(height: 10),
-                  Container(
+                  SizedBox(
                     width: double.infinity,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -52,7 +52,6 @@ class _ProductListScreenState extends State<ProductListScreen> {
                 mainAxisSpacing: 15,
               ),
               itemBuilder: (context, index) {
-                print('Testing ===>> ${myData.data[index].toString()} ');
                 return Stack(
                   children: [
                     Container(
@@ -66,10 +65,11 @@ class _ProductListScreenState extends State<ProductListScreen> {
                             InkWell(
                               onTap: () {
                                 Navigator.push(context, MaterialPageRoute(builder: (context)=> ProductDetailPage(
-                                  mProdId: int.parse(myData.data[index].id.toString()),
-                                  image: myData.data[index].image.toString(),
-                                  name: myData.data[index].name.toString(),
-                                  price: myData.data[index].price.toString(),
+                                  products: myData.data[index]
+                                  // mProdId: int.parse(myData.data[index].id.toString()),
+                                  // image: myData.data[index].image.toString(),
+                                  // name: myData.data[index].name.toString(),
+                                  // price: myData.data[index].price.toString(),
                                 )));
                               },
                               child: Image.network(myData.data[index].image.toString(), height: 80, width: 80)),
