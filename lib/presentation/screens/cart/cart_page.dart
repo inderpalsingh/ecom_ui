@@ -24,8 +24,40 @@ class MyCartPage extends StatelessWidget {
           ),
         ),
       ),
-      body: const Column(
-        children: [],
+      body: Column(
+        children: [
+          const SizedBox(height: 10),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Container(
+              height: 130,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.white
+              ),
+              child: Column(
+                children: [
+                  Container(
+                    padding: EdgeInsets.only(top: 10, left: 10),
+                    child: Row(
+                      children: [
+                        Container(
+                          height: 100,
+                          width: 100,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Color(0xff0f3f3f3)
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Text('Woman')
+                ],
+              ),
+            ),
+          )
+        ],
       ),
     );
   }
