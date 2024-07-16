@@ -15,6 +15,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 
+import 'presentation/screens/cart/cart_page.dart';
+
 void main() {
   runApp(MultiBlocListener(listeners: [
     /// user
@@ -34,12 +36,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Ecom UI',
       theme: ThemeData(
         useMaterial3: true,
         fontFamily: GoogleFonts.poppins().fontFamily,
       ),
-      home: const SplashPage(),
+      home: const MyCartPage(),
     );
   }
 }

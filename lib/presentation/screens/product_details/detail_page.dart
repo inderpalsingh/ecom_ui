@@ -189,7 +189,7 @@ class ProductDetailPage extends StatelessWidget {
                               children: [
                                 Container(
                                   height: 40,
-                                  width: 140,
+                                  width: 130,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(21),
                                     border: Border.all(width: 1,color: Colors.white),
