@@ -15,12 +15,12 @@ class MyCartPage extends StatelessWidget {
         automaticallyImplyLeading: true,
         backgroundColor: AppConstants.bgPrimaryColor,
         title: const Text('My Cart'),
-        leading: const Padding(
-          padding: EdgeInsets.only(left: 20),
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 20),
           child: CircleAvatar(
             radius: 20,
             backgroundColor: Colors.white,
-            child: Icon(Icons.arrow_back_ios_new_outlined),
+            child: IconButton(onPressed: (){}, icon: Icon(Icons.arrow_back_ios_new_outlined)),
           ),
         ),
       ),

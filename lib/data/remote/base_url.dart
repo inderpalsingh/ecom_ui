@@ -18,6 +18,11 @@ class BaseUrlService{
   static const String PRODUCTS = '$BASE_URL/products';
   static const String CATEGORIES = '$BASE_URL/categories';
 
+  /// Cart
+  ///
+  static const String ADD_TO_CART = '$BASE_URL/add-to-card';
+  static const String VIEW_TO_CART = '$BASE_URL/product/view-cart';
+
 
 
 }
