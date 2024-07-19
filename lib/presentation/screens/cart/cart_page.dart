@@ -1,8 +1,21 @@
 import 'package:ecom_ui/presentation/constants/app_constants.dart';
+import 'package:ecom_ui/presentation/screens/blocs/view_cart/bloc/view_cart_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class MyCartPage extends StatelessWidget {
+class MyCartPage extends StatefulWidget {
   const MyCartPage({super.key});
+
+  @override
+  State<MyCartPage> createState() => _MyCartPageState();
+}
+
+class _MyCartPageState extends State<MyCartPage> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<ViewCartBloc>().add(GetViewCartEvent());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,14 +33,14 @@ class MyCartPage extends StatelessWidget {
           child: CircleAvatar(
             radius: 20,
             backgroundColor: Colors.white,
-            child: IconButton(onPressed: (){}, icon: Icon(Icons.arrow_back_ios_new_outlined)),
+            child: IconButton(onPressed: () {}, icon: const Icon(Icons.arrow_back_ios_new_outlined)),
           ),
         ),
       ),
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
             child: Container(
               padding: const EdgeInsets.only(left: 10),
               height: 120,
@@ -86,7 +99,11 @@ class MyCartPage extends StatelessWidget {
                                       decoration: BoxDecoration(borderRadius: BorderRadius.circular(21), color: AppConstants.bgPrimaryColor, border: Border.all(width: 1, color: AppConstants.bgPrimaryColor)),
                                       child: const Row(
                                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                        children: [Text('-'), Text('1'), Text('+')],
+                                        children: [
+                                          Text('-'),
+                                          Text('1'),
+                                          Text('+'),
+                                        ],
                                       ),
                                     ),
                                   ],
@@ -162,11 +179,28 @@ class MyCartPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 30),
-                  Container(
-                    height: 50,
-                    width: 300,
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(40), color: AppConstants.buttonColor),
-                    child: const Center(child: Text('Checkout', style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold))),
+                  BlocListener<ViewCartBloc, ViewCartState>(
+                    listener: (context, state) {
+                      if(state is ViewCartLoadingState){
+                        const Center(child: CircularProgressIndicator());
+                      }
+                      if(state is ViewCartFailedState){
+                        const Center(child: Text('No Cart'));
+                      }
+                      if(state is ViewCartSuccessfullyState){
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Checkout Successfully')));
+                      }
+                    },
+                    child: Container(
+                      height: 50,
+                      width: 300,
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(40), color: AppConstants.buttonColor),
+                      child: const Center(
+                          child: Text(
+                        'Checkout',
+                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                      )),
+                    ),
                   )
                 ],
               ),

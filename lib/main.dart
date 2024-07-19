@@ -2,17 +2,20 @@ import 'package:ecom_ui/data/remote/cart_api_service.dart';
 import 'package:ecom_ui/data/remote/categories_api_service.dart';
 import 'package:ecom_ui/data/remote/product_api_service.dart';
 import 'package:ecom_ui/data/remote/signup_api_service.dart';
+import 'package:ecom_ui/data/remote/view_cart_api_service.dart';
 import 'package:ecom_ui/data/repository/cart_repository.dart';
 import 'package:ecom_ui/data/repository/categories_repository.dart';
 import 'package:ecom_ui/data/repository/products_repository.dart';
 import 'package:ecom_ui/data/repository/signup_repository.dart';
 import 'package:ecom_ui/data/repository/user_repository.dart';
+import 'package:ecom_ui/data/repository/view_cart_repository.dart';
 import 'package:ecom_ui/presentation/screens/blocs/cart/bloc/cart_bloc.dart';
 import 'package:ecom_ui/presentation/screens/blocs/categories/bloc/categories_bloc.dart';
 import 'package:ecom_ui/presentation/screens/blocs/login/bloc/login_bloc.dart';
 import 'package:ecom_ui/data/remote/user_api_service.dart';
 import 'package:ecom_ui/presentation/screens/blocs/products/bloc/products_bloc.dart';
 import 'package:ecom_ui/presentation/screens/blocs/signup/signup_bloc.dart';
+import 'package:ecom_ui/presentation/screens/blocs/view_cart/bloc/view_cart_bloc.dart';
 import 'package:ecom_ui/presentation/screens/splash/splash_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -30,6 +33,8 @@ void main() {
     BlocProvider(create: (context) => SignupBloc(registerRepository: RegisterRepository(signupApiService: RegisterApiService()))),
     /// cart
     BlocProvider(create: (context) => CartBloc(cartRepository: CartRepository(cartApiService: CartApiService()))),
+    /// view Cart
+    BlocProvider(create: (context) => ViewCartBloc(viewCartRepository: ViewCartRepository(viewCartApiService: ViewCartApiService()))),
 
   ], child: const MyApp()));
 }

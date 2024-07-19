@@ -203,23 +203,21 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                 ),
                                 BlocListener<CartBloc, CartState>(
                                   listener: (_, state) {
-                                    if(state is CartLoadingState){
-                                      const Center(child: Text('Loading.. '));
+                                    if (state is CartLoadingState) {
+                                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Adding to cart ... ')));
+
+                                      setState(() {});
                                     }
                                     if (state is CartFailedState) {
-                                      const Center(child: Text('No Card'));
+                                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.errorMsg)));
+                                      setState(() {});
                                     }
-                                    if(state is CartSuccessfullState){
+                                    if (state is CartSuccessfullState) {
                                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Added to cart Successfully')));
 
-                                    setState(() {
-
-                                    });
+                                      setState(() {});
                                     }
-
                                   },
-
-
                                   child: Container(
                                     height: 55,
                                     width: 180,
