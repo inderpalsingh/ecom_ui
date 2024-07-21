@@ -1,5 +1,6 @@
 import 'package:ecom_ui/data/models/products_model.dart';
 import 'package:ecom_ui/presentation/screens/blocs/cart/bloc/cart_bloc.dart';
+import 'package:ecom_ui/presentation/screens/cart/cart_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -214,7 +215,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                     }
                                     if (state is CartSuccessfullState) {
                                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Added to cart Successfully')));
-
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => MyCartPage()));
                                       setState(() {});
                                     }
                                   },
@@ -229,6 +230,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                         child: InkWell(
                                             onTap: () {
                                               context.read<CartBloc>().add(AddToCartEvent(productId: int.parse(widget.products.id.toString()), qty: qty));
+
                                             },
                                             child: const Text('Add to Cart', style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold)))),
                                   ),

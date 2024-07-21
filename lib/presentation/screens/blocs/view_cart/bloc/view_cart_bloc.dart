@@ -22,7 +22,7 @@ class ViewCartBloc extends Bloc<ViewCartEvent, ViewCartState> {
             getCart.add(data);
           }
 
-          print('responseData ==> $responseData');
+
           emit(ViewCartSuccessfullyState(viewCartModel: getCart));
         }else{
           emit(ViewCartFailedState(errorMsg: responseData['message']));

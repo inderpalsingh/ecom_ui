@@ -1,10 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class ViewCartModel {
-  String? id;
-  String? productId;
+  int? id;
+  int? productId;
   String? name;
   String? price;
-  String? quantity;
+  int? quantity;
   String? image;
 
   ViewCartModel({required this.id, required this.productId, required this.name, required this.price, required this.quantity, required this.image});
