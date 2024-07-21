@@ -26,6 +26,12 @@ class _MyCartPageState extends State<MyCartPage> {
     context.read<ViewCartBloc>().add(GetViewCartEvent());
   }
 
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+
   void getTotalAmountCartItems(List<ViewCartModel> allItems) {
     Timer(const Duration(seconds: 1), () {
       totalAmt = 0.0;
@@ -268,7 +274,9 @@ class _MyCartPageState extends State<MyCartPage> {
                               child: InkWell(
                                   onTap: () {
                                     context.read<OrderplaceBloc>().add(MyOrderPlaceEvent());
-                                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SplashPage()));
+                                    Future.delayed(const Duration(seconds: 3),(){
+                                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SplashPage()));
+                                    });
                                   },
                                   child: const Center(child: Text('Checkout', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)))),
                             ))

@@ -7,6 +7,7 @@ part 'orderplace_state.dart';
 
 class OrderplaceBloc extends Bloc<OrderplaceEvent, OrderplaceState> {
   OrderRepository orderRepository;
+
   OrderplaceBloc({required this.orderRepository}) : super(OrderplaceInitialState()) {
     on<MyOrderPlaceEvent>((event, emit)async {
 
