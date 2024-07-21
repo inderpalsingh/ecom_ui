@@ -14,15 +14,16 @@ class ViewCartBloc extends Bloc<ViewCartEvent, ViewCartState> {
 
       try {
         var responseData = await viewCartRepository.getViewCartRepository();
-        if (responseData['status']) {
+        if (responseData != null ) {
           List<ViewCartModel> getCart = [];
 
           for (Map<String, dynamic> eachCart in responseData['data']) {
             var data = ViewCartModel.fromJSON(eachCart);
             getCart.add(data);
           }
-
-
+          // print('cart ==>> ${responseData['status']}');
+          // print('cart data ==>>  ${responseData['data']}');
+          // print('getCart ==>> ${getCart.toString()}');
           emit(ViewCartSuccessfullyState(viewCartModel: getCart));
         }else{
           emit(ViewCartFailedState(errorMsg: responseData['message']));
