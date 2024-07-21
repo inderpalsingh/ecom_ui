@@ -18,7 +18,6 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    // print('currentItem ==> ${mProdId}');
 
     return Scaffold(
       backgroundColor: Colors.white70,
@@ -214,25 +213,28 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                       setState(() {});
                                     }
                                     if (state is CartSuccessfullState) {
+                                      print('CartSuccessfullState ==> $state');
                                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Added to cart Successfully')));
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => MyCartPage()));
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => const MyCartPage()));
                                       setState(() {});
                                     }
                                   },
-                                  child: Container(
-                                    height: 55,
-                                    width: 180,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(21),
-                                      color: const Color(0xff0ff5b0f),
+                                  child: InkWell(
+                                    onTap: () {
+                                      context.read<CartBloc>().add(AddToCartEvent(productId: int.parse(widget.products.id.toString()), qty: qty));
+                                    },
+                                    child: Container(
+                                      height: 55,
+                                      width: 180,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(21),
+                                        color: const Color(0xff0ff5b0f),
+                                      ),
+                                      child: const Center(
+                                          child: Text('Add to Cart', style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
+                                          )
+                                        ),
                                     ),
-                                    child: Center(
-                                        child: InkWell(
-                                            onTap: () {
-                                              context.read<CartBloc>().add(AddToCartEvent(productId: int.parse(widget.products.id.toString()), qty: qty));
-
-                                            },
-                                            child: const Text('Add to Cart', style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold)))),
                                   ),
                                 )
                               ],

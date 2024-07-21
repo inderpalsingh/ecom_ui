@@ -52,7 +52,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         fontFamily: GoogleFonts.poppins().fontFamily,
       ),
-      home: const MyCartPage(),
+      home: const SplashPage(),
     );
   }
 }

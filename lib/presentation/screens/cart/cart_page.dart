@@ -28,6 +28,7 @@ class _MyCartPageState extends State<MyCartPage> {
       for(ViewCartModel eachItem in allItems){
         totalAmt = double.parse(eachItem.price!) * eachItem.quantity!;
       }
+
       setState(() {
 
       });
@@ -119,12 +120,12 @@ class _MyCartPageState extends State<MyCartPage> {
                                                 height: 30,
                                                 width: 100,
                                                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(21), color: AppConstants.bgPrimaryColor, border: Border.all(width: 1, color: AppConstants.bgPrimaryColor)),
-                                                child: const Row(
+                                                child: Row(
                                                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                                   children: [
-                                                    Text('-'),
-                                                    Text('1'),
-                                                    Text('+'),
+                                                    const Text('-'),
+                                                    Text(state.viewCartModel[index].quantity.toString()),
+                                                    const Text('+'),
                                                   ],
                                                 ),
                                               ),
