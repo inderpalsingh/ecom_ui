@@ -4,8 +4,10 @@ import 'package:ecom_ui/data/models/view_cart_model.dart';
 import 'package:ecom_ui/presentation/constants/app_constants.dart';
 import 'package:ecom_ui/presentation/screens/blocs/order/bloc/orderplace_bloc.dart';
 import 'package:ecom_ui/presentation/screens/blocs/view_cart/bloc/view_cart_bloc.dart';
+import 'package:ecom_ui/presentation/screens/splash/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 
 class MyCartPage extends StatefulWidget {
   const MyCartPage({super.key});
@@ -16,6 +18,7 @@ class MyCartPage extends StatefulWidget {
 
 class _MyCartPageState extends State<MyCartPage> {
   num totalAmt = 0.0;
+  bool isOrderPlacing = false;
 
   @override
   void initState() {
@@ -105,7 +108,6 @@ class _MyCartPageState extends State<MyCartPage> {
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Row(
-                                            // crossAxisAlignment: CrossAxisAlignment.start,
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             children: [
                                               Text(mData.name.toString().toUpperCase(), style: const TextStyle(fontSize: 20)),
@@ -118,7 +120,7 @@ class _MyCartPageState extends State<MyCartPage> {
                                             // crossAxisAlignment: CrossAxisAlignment.start,
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             children: [
-                                              Text('\$ ${mData.price.toString()}', style: const TextStyle(fontWeight: FontWeight.bold)),
+                                              Text('\u{20B9} ${mData.price.toString()}', style: const TextStyle(fontWeight: FontWeight.bold)),
                                               Container(
                                                 height: 30,
                                                 width: 100,
@@ -194,7 +196,7 @@ class _MyCartPageState extends State<MyCartPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text('Subtotal', style: TextStyle(color: Colors.grey[600], fontSize: 15)),
-                            Text('\$$totalAmt', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 17)),
+                            Text('\u{20B9} $totalAmt', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 17)),
                           ],
                         ),
                         const SizedBox(height: 10),
@@ -204,19 +206,72 @@ class _MyCartPageState extends State<MyCartPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             const Text('Total', style: TextStyle(fontSize: 15)),
-                            Text('\$${totalAmt + totalAmt * 0.1}', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 17)),
+                            Text('\u{20B9} ${totalAmt + totalAmt * 0.1}', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 17)),
                           ],
                         ),
                       ],
                     ),
                   ),
                   const SizedBox(height: 30),
-                  Container(
-                    height: 50,
-                    width: 300,
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(40), color: AppConstants.buttonColor),
-                    child: Center(child: const Text('Checkout', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold))),
-                  )
+                  BlocListener<OrderplaceBloc, OrderplaceState>(
+                      listener: (context, state) {
+                        if (state is OrderplaceLoadingState) {
+                          const Center(child: CircularProgressIndicator());
+                          isOrderPlacing = true;
+                          setState(() {});
+                        }
+                        if (state is OrderplaceFailedState) {
+                          isOrderPlacing = false;
+                          setState(() {});
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Failde to place order: ${state.errorMsg}')));
+                        }
+                        if (state is OrderplaceLoadingState) {
+                          isOrderPlacing = false;
+                          setState(() {});
+
+                          showModalBottomSheet(
+                              context: context,
+                              builder: (context) {
+                                return SizedBox(
+                                  height: 300,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Lottie.asset(
+                                        'assets/lottie/Order-Animation-1721569231440.json',
+                                        width: double.infinity,
+                                        height: 200,
+                                      ),
+                                      const Text('Order Placed Successfully')
+                                    ],
+                                  ),
+                                );
+                              });
+                        }
+                      },
+                      child: isOrderPlacing
+                          ? Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  height: 50,
+                                  width: 300,
+                                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(40), color: AppConstants.buttonColor),
+                                  child: const Center(child: Text('Placing Order ..', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold))),
+                                )
+                              ],
+                            )
+                          : Container(
+                              height: 50,
+                              width: 300,
+                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(40), color: AppConstants.buttonColor),
+                              child: InkWell(
+                                  onTap: () {
+                                    context.read<OrderplaceBloc>().add(MyOrderPlaceEvent());
+                                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SplashPage()));
+                                  },
+                                  child: const Center(child: Text('Checkout', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)))),
+                            ))
                 ],
               ),
             ),
