@@ -213,7 +213,6 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                       setState(() {});
                                     }
                                     if (state is CartSuccessfullState) {
-                                      print('CartSuccessfullState ==> $state');
                                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Added to cart Successfully')));
                                       Navigator.push(context, MaterialPageRoute(builder: (context) => const MyCartPage()));
                                       setState(() {});

@@ -12,11 +12,7 @@ class CategoriesList extends StatefulWidget {
 class _CategoriesListState extends State<CategoriesList> {
     CategoriesModel? myData;
 
-  @override
-  void initState() {
-    super.initState();
-    // context.read<CategoriesBloc>().add(CategoriesAllEvent());
-  }
+
 
   @override
   Widget build(BuildContext context) {

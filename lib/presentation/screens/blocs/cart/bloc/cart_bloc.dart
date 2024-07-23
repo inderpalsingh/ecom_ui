@@ -13,7 +13,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
       try {
         var responseData = await cartRepository.addToCartRepository(productId: event.productId, quantity: event.qty);
-        if (responseData['status']) {
+        if (responseData != null) {
           emit(CartSuccessfullState());
         } else {
           emit(CartFailedState(errorMsg: responseData['message']));

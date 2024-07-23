@@ -17,20 +17,19 @@ class MyCartPage extends StatefulWidget {
 }
 
 class _MyCartPageState extends State<MyCartPage> {
+
   num totalAmt = 0.0;
   bool isOrderPlacing = false;
+  int qty = 1;
+
 
   @override
   void initState() {
     super.initState();
     context.read<ViewCartBloc>().add(GetViewCartEvent());
+
   }
 
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-  }
 
   void getTotalAmountCartItems(List<ViewCartModel> allItems) {
     Timer(const Duration(seconds: 1), () {
@@ -69,95 +68,78 @@ class _MyCartPageState extends State<MyCartPage> {
       ),
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-            child: Container(
-              padding: const EdgeInsets.only(left: 10),
-              height: 120,
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: Colors.white),
-              child: Column(
-                children: [
-                  BlocBuilder<ViewCartBloc, ViewCartState>(
-                    builder: (_, state) {
-                      if (state is ViewCartLoadingState) {
-                        return const Center(child: CircularProgressIndicator());
-                      }
-                      if (state is ViewCartFailedState) {
-                        return Center(child: Text(state.errorMsg));
-                      }
-                      if (state is ViewCartSuccessfullyState) {
-                        return Expanded(
-                          child: ListView.builder(
-                            itemCount: state.viewCartModel.length,
-                            itemBuilder: (context, index) {
-                              ViewCartModel mData = state.viewCartModel[index];
-                              if (index == state.viewCartModel.length - 1) {
-                                getTotalAmountCartItems(state.viewCartModel);
-                              }
-                              return Row(
-                                children: [
-                                  Container(
-                                    margin: const EdgeInsets.only(top: 10),
-                                    height: 100,
-                                    width: 100,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: const Color(0xff0f3f3f3),
-                                    ),
-                                    child: Image.network(mData.image.toString()),
-                                  ),
-                                  SizedBox(
-                                    width: 300,
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                                      child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(mData.name.toString().toUpperCase(), style: const TextStyle(fontSize: 20)),
-                                              Icon(Icons.delete_outline_outlined, color: Colors.red[300]),
-                                            ],
-                                          ),
-                                          Text(mData.name.toString()),
-                                          const SizedBox(height: 10),
-                                          Row(
-                                            // crossAxisAlignment: CrossAxisAlignment.start,
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text('\u{20B9} ${mData.price.toString()}', style: const TextStyle(fontWeight: FontWeight.bold)),
-                                              Container(
-                                                height: 30,
-                                                width: 100,
-                                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(21), color: AppConstants.bgPrimaryColor, border: Border.all(width: 1, color: AppConstants.bgPrimaryColor)),
-                                                child: Row(
-                                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                                  children: [
-                                                    const Text('-'),
-                                                    Text(mData.quantity.toString()),
-                                                    const Text('+'),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              );
-                            },
+          BlocBuilder<ViewCartBloc, ViewCartState>(
+            builder: (_, state) {
+              if (state is ViewCartLoadingState) {
+                return const Center(child: CircularProgressIndicator());
+              }
+              if (state is ViewCartFailedState) {
+                return Center(child: Text(state.errorMsg));
+              }
+              if (state is ViewCartSuccessfullyState) {
+                return ListView.builder(
+                  shrinkWrap: true,
+
+                  itemCount: state.viewCartModel.length,
+                  itemBuilder: (context, index) {
+                    ViewCartModel mData = state.viewCartModel[index];
+                    if (index == state.viewCartModel.length - 1) {
+                      getTotalAmountCartItems(state.viewCartModel);
+                    }
+                    return Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                      child: Card(
+                        color: Colors.amber[50],
+                        elevation: 0,
+                        child: Container(
+                          margin: const EdgeInsets.only(top: 10),
+                          height: 100,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
                           ),
-                        );
-                      }
-                      return const SizedBox();
-                    },
-                  ),
-                ],
-              ),
-            ),
+                          child: ListTile(
+                            leading: Image.network(mData.image.toString()),
+                            title: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(mData.name.toString().toUpperCase(), style: const TextStyle(fontSize: 20)),
+                                Icon(Icons.delete_outline_outlined, color: Colors.red[300]),
+                              ],
+                            ),
+                            subtitle: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text('\u{20B9} ${mData.price.toString()}', style: const TextStyle(fontWeight: FontWeight.bold)),
+                                Container(
+                                  height: 30,
+                                  width: 100,
+                                  margin: const EdgeInsets.symmetric(vertical: 10),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(21),
+                                    color: AppConstants.bgPrimaryColor,
+                                    border: Border.all(width: 1, color: AppConstants.bgPrimaryColor),
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      const Text('-'),
+                                      Text(mData.quantity.toString()),
+                                      const Text('+'),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                );
+              }
+              return const SizedBox();
+            },
           ),
           const Spacer(),
           Align(
@@ -255,8 +237,7 @@ class _MyCartPageState extends State<MyCartPage> {
                               });
                         }
                       },
-                      child: isOrderPlacing
-                          ? Row(
+                      child: isOrderPlacing ? Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Container(
@@ -274,9 +255,9 @@ class _MyCartPageState extends State<MyCartPage> {
                               child: InkWell(
                                   onTap: () {
                                     context.read<OrderplaceBloc>().add(MyOrderPlaceEvent());
-                                    Future.delayed(const Duration(seconds: 3),(){
-                                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SplashPage()));
-                                    });
+                                    // Future.delayed(const Duration(seconds: 3), () {
+                                    //   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const SplashPage()));
+                                    // });
                                   },
                                   child: const Center(child: Text('Checkout', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)))),
                             ))
