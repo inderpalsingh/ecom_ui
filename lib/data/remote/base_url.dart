@@ -24,7 +24,7 @@ class BaseUrlService{
 
 
   /// Order
-  static const String PLACE_ORDER = '$BASE_URL/create-order';
-  static const String GET_ORDER = '$BASE_URL/get-order';
+  static const String PLACE_ORDER = '$BASE_URL/product/create-order';
+  static const String GET_ORDER = '$BASE_URL/product/get-order';
 
 }

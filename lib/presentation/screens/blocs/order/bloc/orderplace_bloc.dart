@@ -15,6 +15,7 @@ class OrderplaceBloc extends Bloc<OrderplaceEvent, OrderplaceState> {
       try {
         var respData = await orderRepository.createOrderRepository();
         if(respData['status']){
+          print('order ===>> ${respData['status']}');
           emit(OrderplaceSuccessFullyState());
         } else{
           emit(OrderplaceFailedState(errorMsg: respData['message']));

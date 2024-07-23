@@ -14,8 +14,8 @@ class ViewCartBloc extends Bloc<ViewCartEvent, ViewCartState> {
 
       try {
         var responseData = await viewCartRepository.getViewCartRepository();
+        List<ViewCartModel> getCart = [];
         if (responseData != null ) {
-          List<ViewCartModel> getCart = [];
 
           for (Map<String, dynamic> eachCart in responseData['data']) {
             var data = ViewCartModel.fromJSON(eachCart);
