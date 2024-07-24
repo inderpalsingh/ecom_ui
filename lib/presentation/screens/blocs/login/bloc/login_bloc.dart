@@ -19,7 +19,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           } else {
             emit(UserFailedState(errorMsg: resJson['message']));
           }
-        }
+        }else {
+            emit(UserFailedState(errorMsg: resJson['message']));
+          }
       } catch (e) {
         emit(UserFailedState(errorMsg: e.toString()));
       }

@@ -78,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
                         const Center(child: CircularProgressIndicator());
                       }
                       if (state is UserFailedState) {
-                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Something went wrong !!')));
+                        ScaffoldMessenger.of(context).showSnackBar( SnackBar(content: Text(state.errorMsg)));
                       }
                       if (state is UserSuccessState) {
                         ScaffoldMessenger.of(context).showSnackBar(
